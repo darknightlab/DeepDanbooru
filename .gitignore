@@ -5,6 +5,9 @@ __pycache__/
 test.py
 /logs
 /uploads
+/build
+/dist
+/deepdanbooru.egg-info
 *.jpg
 *.jpeg
 *.png

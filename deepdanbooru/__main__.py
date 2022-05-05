@@ -197,5 +197,46 @@ def evaluate(
     )
 
 
+@main.command("web", help="starting a web service")
+@click.option(
+    "--project-path",
+    type=click.Path(exists=True, resolve_path=True, file_okay=False, dir_okay=True),
+    help="Project path. If you want to use specific model and tags, use --model-path and --tags-path options.",
+)
+@click.option(
+    "--model-path",
+    type=click.Path(exists=True, resolve_path=True, file_okay=True, dir_okay=False),
+)
+@click.option(
+    "--tags-path",
+    type=click.Path(exists=True, resolve_path=True, file_okay=True, dir_okay=False),
+)
+@click.option("--threshold", default=0.5)
+@click.option("--allow-gpu", default=False, is_flag=True)
+@click.option("--compile/--no-compile", "compile_model", default=False)
+@click.option("--port", default=80)
+@click.option("--verbose", default=False, is_flag=True)
+def web(
+    project_path,
+    model_path,
+    tags_path,
+    threshold,
+    allow_gpu,
+    compile_model,
+    port,
+    verbose,
+):
+    dd.commands.web_upload(
+        project_path,
+        model_path,
+        tags_path,
+        threshold,
+        allow_gpu,
+        compile_model,
+        port,
+        verbose,
+    )
+
+
 if __name__ == "__main__":
     main()

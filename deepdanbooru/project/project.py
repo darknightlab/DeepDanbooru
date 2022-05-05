@@ -14,7 +14,7 @@ DEFAULT_PROJECT_CONTEXT = {
     "checkpoint_frequency_mb": 200,
     "console_logging_frequency_mb": 10,
     "loss": "binary_crossentropy",
-    "optimizer": "adam",    
+    "optimizer": "adam",
     "learning_rate": 0.001,
     "rotation_range": [0.0, 360.0],
     "scale_range": [0.9, 1.1],
@@ -48,5 +48,11 @@ def load_model_from_project(project_path, compile_model=True):
 
 def load_tags_from_project(project_path):
     tags_path = os.path.join(project_path, "tags.txt")
+
+    return dd.data.load_tags(tags_path)
+
+
+def load_tags_character_from_project(project_path):
+    tags_path = os.path.join(project_path, "tags-character.txt")
 
     return dd.data.load_tags(tags_path)
