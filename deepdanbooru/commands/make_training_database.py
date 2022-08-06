@@ -89,8 +89,10 @@ def make_training_database(
             if is_deleted and not use_deleted:
                 continue
 
-            if rating == "s":
-                tags += f" rating:safe"
+            if rating == "g":
+                tags += f" rating:general"
+            elif rating == "s":
+                tags += f" rating:sensitive"            
             elif rating == "q":
                 tags += f" rating:questionable"
             elif rating == "e":
