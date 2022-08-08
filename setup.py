@@ -18,6 +18,9 @@ install_requires = [
     "scikit-image>=0.15.0",
     "requests>=2.22.0",
     "six>=1.13.0",
+    "flask>=2.1.2",
+    "flask_restful>=0.3.9",
+    "flask_cors>=3.0.10",
 ]
 
 tensorflow_pkg = [
