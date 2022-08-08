@@ -5,6 +5,7 @@ import tensorflow as tf
 import deepdanbooru as dd
 
 from flask import Flask
+from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
 from werkzeug.datastructures import FileStorage
 
@@ -74,6 +75,7 @@ def web_upload(
         tags_character = dd.project.load_tags_character_from_project(project_path)
 
     app = Flask(__name__)
+    CORS(app)
     api = Api(app)
     api.add_resource(WebUpload, "/upload", resource_class_kwargs={"model": model, "tags": tags, "tags_character": tags_character, "threshold": threshold, "verbose": verbose})
     app.run(host="0.0.0.0", port=port)
