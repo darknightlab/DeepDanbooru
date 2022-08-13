@@ -9,11 +9,23 @@ __version__ = "1.0.0"
 
 @click.version_option(prog_name="DeepDanbooru", version=__version__)
 @click.group()
-def main():
+@click.option('--gpu-memory-limit', default=0)
+def main(gpu_memory_limit):
     """
     AI based multi-label girl image classification system, implemented by using TensorFlow.
     """
-    pass
+    if gpu_memory_limit > 0:
+        import tensorflow as tf
+        gpus = tf.config.list_physical_devices('GPU')
+        if gpus:
+          # Restrict TensorFlow to only allocate 1GB of memory on the first GPU
+          try:
+            tf.config.set_logical_device_configuration(
+                gpus[0],
+                [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=gpu_memory_limit)])
+          except RuntimeError as e:
+            # Virtual devices must be set before GPUs have been initialized
+            print(e)
 
 
 @main.command("create-project")
